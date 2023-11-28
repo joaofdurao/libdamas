@@ -10,6 +10,9 @@ public class User {
     private char type;
     private List<Book> userBooks;
 
+    public User() {
+    }
+
     public User(long id, char name, char phoneNumber, char enrollment, char type, List<Book> userBooks) {
         this.id = id;
         this.name = name;
@@ -65,6 +68,12 @@ public class User {
 
     public void setUserBooks(List<Book> userBooks) {
         this.userBooks = userBooks;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", enrollment=" + enrollment
+                + ", type=" + type + ", userBooks=" + userBooks + "]";
     }
 
 }

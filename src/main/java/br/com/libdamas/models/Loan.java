@@ -13,6 +13,9 @@ public class Loan {
     private boolean closed;
     private boolean overdue;
 
+    public Loan() {
+    }
+
     public Loan(long id, User ownerUser, Book borrowedBook, List<Book> userBooks, Date loanDate, Date returnDate,
             boolean closed, boolean overdue) {
         this.id = id;
@@ -87,6 +90,13 @@ public class Loan {
 
     public void setOverdue(boolean overdue) {
         this.overdue = overdue;
+    }
+
+    @Override
+    public String toString() {
+        return "Loan [id=" + id + ", ownerUser=" + ownerUser + ", borrowedBook=" + borrowedBook + ", userBooks="
+                + userBooks + ", loanDate=" + loanDate + ", returnDate=" + returnDate + ", closed=" + closed
+                + ", overdue=" + overdue + "]";
     }
 
 }

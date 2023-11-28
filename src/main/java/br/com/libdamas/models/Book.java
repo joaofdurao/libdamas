@@ -9,6 +9,9 @@ public class Book {
     private boolean available;
     private User currentOwner;
 
+    public Book() {
+    }
+
     public Book(long id, char title, char author, char year, char genre, boolean available, User currentOwner) {
         this.id = id;
         this.title = title;
@@ -73,6 +76,12 @@ public class Book {
 
     public void setCurrentOwner(User currentOwner) {
         this.currentOwner = currentOwner;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", genre=" + genre
+                + ", available=" + available + ", currentOwner=" + currentOwner + "]";
     }
 
 }
