@@ -6,16 +6,16 @@ public class Book {
     private char author;
     private char year;
     private char genre;
-    private boolean avaible;
+    private boolean available;
     private User currentOwner;
 
-    public Book(long id, char title, char author, char year, char genre, boolean avaible, User currentOwner) {
+    public Book(long id, char title, char author, char year, char genre, boolean available, User currentOwner) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.genre = genre;
-        this.avaible = avaible;
+        this.available = available;
         this.currentOwner = currentOwner;
     }
 
@@ -59,12 +59,12 @@ public class Book {
         this.genre = genre;
     }
 
-    public boolean isAvaible() {
-        return avaible;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public void setAvaible(boolean avaible) {
-        this.avaible = avaible;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public User getCurrentOwner() {
