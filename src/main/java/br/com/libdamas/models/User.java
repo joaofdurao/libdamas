@@ -2,12 +2,29 @@ package br.com.libdamas.models;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "USERS")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column
     private char name;
+    @Column
     private char phoneNumber;
+    @Column
     private char enrollment;
+    @Column
     private char type;
+    @Column
     private List<Book> userBooks;
 
     public User() {

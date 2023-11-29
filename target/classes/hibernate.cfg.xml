@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/teste</property>
+
+        <!-- <property name="connection.driver_class">com.mysql.jdbcDriver</property>
+        <property name="connection.url">jdbc:hsqldb:mysql://localhost/cmevents?autoReconnect=true</property> -->
+        <property name="connection.username">root</property>
+        <property name="connection.password">qwerty@123</property>
+        
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">create</property>
+
+        
+
+
+        
+    </session-factory>
+
+</hibernate-configuration>
