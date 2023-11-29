@@ -13,7 +13,7 @@
 
             <!-- H2 in-memory database -->
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:mariadb://localhost:3306/teste"/>
+                      value="jdbc:mariadb://localhost:3306/libdamas_DB"/>
 
             <!-- Credentials -->
             <property name="jakarta.persistence.jdbc.user"
