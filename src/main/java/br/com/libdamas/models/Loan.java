@@ -1,63 +1,64 @@
 package br.com.libdamas.models;
 
-import java.util.List;
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name = "LOANS_TB")
 public class Loan {
-    private long id;
-    private User ownerUser;
-    private Book borrowedBook;
-    private List<Book> userBooks;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Temporal(TemporalType.DATE)
     private Date loanDate;
+
+    @Temporal(TemporalType.DATE)
     private Date returnDate;
+
+    @Column
+    @Convert(converter = org.hibernate.type.YesNoConverter.class)
     private boolean closed;
+
+    @Column
+    @Convert(converter = org.hibernate.type.YesNoConverter.class)
     private boolean overdue;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_User_id")
+    private User user;
 
     public Loan() {
     }
 
-    public Loan(long id, User ownerUser, Book borrowedBook, List<Book> userBooks, Date loanDate, Date returnDate,
-            boolean closed, boolean overdue) {
+    public Loan(Long id, Date loanDate, Date returnDate, boolean closed, boolean overdue, User user) {
         this.id = id;
-        this.ownerUser = ownerUser;
-        this.borrowedBook = borrowedBook;
-        this.userBooks = userBooks;
         this.loanDate = loanDate;
         this.returnDate = returnDate;
         this.closed = closed;
         this.overdue = overdue;
+        this.user = user;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getOwnerUser() {
-        return ownerUser;
-    }
-
-    public void setOwnerUser(User ownerUser) {
-        this.ownerUser = ownerUser;
-    }
-
-    public Book getBorrowenBook() {
-        return borrowedBook;
-    }
-
-    public void setBorrowenBook(Book borrowenBook) {
-        this.borrowedBook = borrowenBook;
-    }
-
-    public List<Book> getUserBooks() {
-        return userBooks;
-    }
-
-    public void setUserBooks(List<Book> userBooks) {
-        this.userBooks = userBooks;
     }
 
     public Date getLoanDate() {
@@ -92,11 +93,18 @@ public class Loan {
         this.overdue = overdue;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
-        return "Loan [id=" + id + ", ownerUser=" + ownerUser + ", borrowedBook=" + borrowedBook + ", userBooks="
-                + userBooks + ", loanDate=" + loanDate + ", returnDate=" + returnDate + ", closed=" + closed
-                + ", overdue=" + overdue + "]";
+        return "Loan [id=" + id + ", loanDate=" + loanDate + ", returnDate=" + returnDate + ", closed=" + closed
+                + ", overdue=" + overdue + ", user=" + user + "]";
     }
 
 }
