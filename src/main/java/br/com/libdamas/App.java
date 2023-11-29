@@ -1,10 +1,8 @@
 package br.com.libdamas;
 
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import br.com.libdamas.utils.HibernateUtil;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 /**
  * Hello world!
@@ -12,10 +10,10 @@ import br.com.libdamas.utils.HibernateUtil;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+    public static void main( String[] args ){
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariaDB");
+        
         
     }
 }
