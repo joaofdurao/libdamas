@@ -1,6 +1,7 @@
 package br.com.libdamas.models;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -10,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -40,6 +43,12 @@ public class Loan {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_User_id")
     private User user;
+
+    @ManyToMany
+    @JoinTable(name = "LOAN_BOOK_TB", 
+    joinColumns = @JoinColumn(name = "LOAN_ID"),
+    inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
+    private List<Book> books;
 
     public Loan() {
     }

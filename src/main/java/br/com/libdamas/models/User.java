@@ -2,7 +2,6 @@ package br.com.libdamas.models;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,23 +31,18 @@ public class User {
     @Column(length = 50)
     private String type;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Book> books;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Loan> loans;
 
     public User() {
     }
 
-    public User(long id, String name, String phoneNumber, String enrollment, String type, List<Book> books,
-            List<Loan> loans) {
+    public User(long id, String name, String phoneNumber, String enrollment, String type, List<Loan> loans) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.enrollment = enrollment;
         this.type = type;
-        this.books = books;
         this.loans = loans;
     }
 
@@ -92,14 +86,6 @@ public class User {
         this.type = type;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
     public List<Loan> getLoans() {
         return loans;
     }
@@ -111,7 +97,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", enrollment=" + enrollment
-                + ", type=" + type + ", books=" + books + ", loans=" + loans + "]";
+                + ", type=" + type + ", loans=" + loans + "]";
     }
 
 }
