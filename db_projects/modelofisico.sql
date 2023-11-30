@@ -6,8 +6,7 @@ CREATE TABLE Book (
     author varchar(100),
     year char(4),
     genre varchar(100),
-    available boolean,
-    fk_Loan_id bigint
+    available boolean
 );
 
 CREATE TABLE User (
@@ -26,13 +25,23 @@ CREATE TABLE Loan (
     overdue boolean,
     fk_User_id bigint
 );
- 
-ALTER TABLE Book ADD CONSTRAINT FK_Book_2
-    FOREIGN KEY (fk_Loan_id)
-    REFERENCES Loan (id)
-    ON DELETE CASCADE;
+
+CREATE TABLE Loan_Book (
+    fk_Book_id bigint,
+    fk_Loan_id bigint
+);
  
 ALTER TABLE Loan ADD CONSTRAINT FK_Loan_2
     FOREIGN KEY (fk_User_id)
     REFERENCES User (id)
     ON DELETE CASCADE;
+ 
+ALTER TABLE Loan_Book ADD CONSTRAINT FK_Loan_Book_1
+    FOREIGN KEY (fk_Book_id)
+    REFERENCES Book (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Loan_Book ADD CONSTRAINT FK_Loan_Book_2
+    FOREIGN KEY (fk_Loan_id)
+    REFERENCES Loan (id)
+    ON DELETE SET NULL;
