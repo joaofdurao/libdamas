@@ -1,14 +1,14 @@
 package br.com.libdamas.models;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,27 +34,20 @@ public class Book {
     @Convert(converter = org.hibernate.type.YesNoConverter.class)
     private boolean available;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_Loan_id")
-    private Loan loan;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_User_id")
-    private User user;
+    @ManyToMany(mappedBy = "books")
+    private List<Loan> loans;
 
     public Book() {
     }
 
-    public Book(Long id, String title, String author, String year, String genre, boolean available, Loan loan,
-            User user) {
+    public Book(Long id, String title, String author, String year, String genre, boolean available, List<Loan> loans) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.genre = genre;
         this.available = available;
-        this.loan = loan;
-        this.user = user;
+        this.loans = loans;
     }
 
     public Long getId() {
@@ -105,26 +98,18 @@ public class Book {
         this.available = available;
     }
 
-    public Loan getLoan() {
-        return loan;
+    public List<Loan> getLoan() {
+        return loans;
     }
 
-    public void setLoan(Loan loan) {
-        this.loan = loan;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setLoan(List<Loan> loans) {
+        this.loans = loans;
     }
 
     @Override
     public String toString() {
         return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", genre=" + genre
-                + ", available=" + available + ", loan=" + loan + ", user=" + user + "]";
+                + ", available=" + available + ", loans=" + loans + "]";
     }
 
 }

@@ -1,0 +1,13 @@
+br\com\libdamas\services\BookService.class
+br\com\libdamas\controllers\LoanController.class
+br\com\libdamas\services\LoanService.class
+br\com\libdamas\App.class
+br\com\libdamas\models\Loan.class
+br\com\libdamas\repositories\LoanRepository.class
+br\com\libdamas\controllers\BookController.class
+br\com\libdamas\models\User.class
+br\com\libdamas\controllers\UserController.class
+br\com\libdamas\repositories\UserRepository.class
+br\com\libdamas\repositories\BookRepository.class
+br\com\libdamas\models\Book.class
+br\com\libdamas\services\UserService.class
