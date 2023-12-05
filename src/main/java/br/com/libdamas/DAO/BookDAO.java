@@ -1,14 +1,15 @@
 package br.com.libdamas.DAO;
 
-public class BookDAO {
+import jakarta.persistence.EntityManager;
 
+public class BookDAO implements ObjectDAO {
 
-	public void createBook(Book book) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void createInstance(Object obj) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			em.persist(book);
+			em.persist(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -18,13 +19,13 @@ public class BookDAO {
 		}
 	}
 
-	public Book readBook(Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Book book = new Book();
-		
+	public Object readInstance(Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+		Object obj = new Object();
+
 		try {
 			em.getTransaction().begin();
-			book = em.find(Book.class, id);
+			obj = em.find(Object.class, id);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -33,16 +34,16 @@ public class BookDAO {
 			em.close();
 		}
 
-		return book;
+		return obj;
 	}
 
-	public void updateBook(Book book, Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void updateInstance(Object obj, Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			book = em.find(Book.class, id);
-			em.merge(book);
+			obj = em.find(Object.class, id);
+			em.merge(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -52,13 +53,13 @@ public class BookDAO {
 		}
 	}
 
-	public void deleteBook(Book book, Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void deleteInstance(Object obj, Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			book = em.find(Book.class, id);
-			em.remove(book);
+			obj = em.find(Object.class, id);
+			em.remove(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);

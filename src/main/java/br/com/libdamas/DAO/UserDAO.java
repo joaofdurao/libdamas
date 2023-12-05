@@ -1,14 +1,15 @@
 package br.com.libdamas.DAO;
 
-public class UserDAO {
+import jakarta.persistence.EntityManager;
 
+public class UserDAO implements ObjectDAO{
 
-	public void createUser(User user) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void createInstance(Object obj) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			em.persist(user);
+			em.persist(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -18,13 +19,13 @@ public class UserDAO {
 		}
 	}
 
-	public User readUser(Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		User user = new User();
-		
+	public Object readInstance(Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+		Object obj = new Object();
+
 		try {
 			em.getTransaction().begin();
-			user = em.find(User.class, id);
+			obj = em.find(Object.class, id);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -33,16 +34,16 @@ public class UserDAO {
 			em.close();
 		}
 
-		return user;
+		return obj;
 	}
 
-	public void updateUser(User user, Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void updateInstance(Object obj, Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			user = em.find(User.class, id);
-			em.merge(user);
+			obj = em.find(Object.class, id);
+			em.merge(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -52,13 +53,13 @@ public class UserDAO {
 		}
 	}
 
-	public void deleteUser(User user, Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void deleteInstance(Object obj, Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			user = em.find(User.class, id);
-			em.remove(user);
+			obj = em.find(Object.class, id);
+			em.remove(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -67,5 +68,6 @@ public class UserDAO {
 			em.close();
 		}
 	}
+
 
 }

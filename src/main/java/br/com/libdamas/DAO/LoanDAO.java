@@ -1,14 +1,16 @@
 package br.com.libdamas.DAO;
 
-public class LoanDAO {
+import jakarta.persistence.EntityManager;
+
+public class LoanDAO implements ObjectDAO {
 
 
-	public void createLoan(Loan loan) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
+	public void createInstance(Object obj) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			em.persist(loan);
+			em.persist(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -18,13 +20,13 @@ public class LoanDAO {
 		}
 	}
 
-	public Loan readLoan(Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Loan loan = new Loan();
-		
+	public Object readInstance(Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+		Object obj = new Object();
+
 		try {
 			em.getTransaction().begin();
-			loan = em.find(Loan.class, id);
+			obj = em.find(Object.class, id);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -33,32 +35,16 @@ public class LoanDAO {
 			em.close();
 		}
 
-		return loan;
+		return obj;
 	}
 
-	public void updateLoan(Loan loan, Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
-		try {
-			em.getTransaction().begin();
-			loan = em.find(Loan.class, id);
-			em.merge(loan);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			System.err.println(e);
-			em.getTransaction().rollback();
-		} finally {
-			em.close();
-		}
-	}
+	public void updateInstance(Object obj, Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
 
-	public void deleteLoan(Loan loan, Integer id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
 		try {
 			em.getTransaction().begin();
-			loan = em.find(Loan.class, id);
-			em.remove(loan);
+			obj = em.find(Object.class, id);
+			em.merge(obj);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println(e);
@@ -68,4 +54,19 @@ public class LoanDAO {
 		}
 	}
 
+	public void deleteInstance(Object obj, Integer id) {
+		EntityManager em = ObjectDAO.generateEntityManager();
+
+		try {
+			em.getTransaction().begin();
+			obj = em.find(Object.class, id);
+			em.remove(obj);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			System.err.println(e);
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+	}
 }
