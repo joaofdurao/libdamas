@@ -1,5 +1,7 @@
 package br.com.libdamas.DAO;
 
+import java.util.List;
+
 import br.com.libdamas.utils.JPAUtils;
 import jakarta.persistence.EntityManager;
 
@@ -15,9 +17,14 @@ public abstract class InstanceDAO<T> {
         jpaUtils.executeInsideTransaction(entityManager -> entityManager.persist(obj));
     }
 
-    public T readInstance(Integer id) {
+    public T findInstance(Integer id) {
         EntityManager entityManager = jpaUtils.getEntityManager();
         return entityManager.find(getEntityClass(), id);
+    }
+
+    public List<T> findAllInstance() {
+        EntityManager entityManager = jpaUtils.getEntityManager();
+        return entityManager.createQuery("FROM " + getEntityClass().getName(), getEntityClass()).getResultList();
     }
 
     public void updateInstance(T obj, Integer id) {
