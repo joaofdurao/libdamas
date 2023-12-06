@@ -28,7 +28,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Size(min = 5, max = 250)
     @Column(length = 250, nullable = false)
     private String name;
@@ -37,12 +36,10 @@ public class User {
     @Column(length = 10)
     private String phoneNumber;
 
-    @NotNull
     @Size(max = 12)
     @Column(length = 12, nullable = false)
     private String enrollment;
 
-    @NotNull
     @Size(min = 6)
     @Column(nullable = false)
     private String passsword;
