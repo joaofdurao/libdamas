@@ -1,4 +1,4 @@
-package br.com.libdamas.views.configs;
+package br.com.libdamas.views.system;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import br.com.libdamas.views.LoanScreen;
+import br.com.libdamas.views.loan.AdminLoanScreen;
 
 public abstract class ScreenConfigs<T> extends JFrame {
 
@@ -66,7 +66,7 @@ public abstract class ScreenConfigs<T> extends JFrame {
     }
 
     public void openLoansScreen() {
-        new LoanScreen();
+        new AdminLoanScreen();
     }
 
     public void openUsersScreen() {

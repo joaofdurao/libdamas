@@ -1,6 +1,4 @@
-package br.com.libdamas.views;
-
-import br.com.libdamas.views.configs.ScreenConfigs;
+package br.com.libdamas.views.system;
 
 public class MainScreen extends ScreenConfigs<MainScreen> {
 

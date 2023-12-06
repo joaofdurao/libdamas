@@ -2,7 +2,7 @@ package br.com.libdamas;
 
 import br.com.libdamas.DAO.LoanDAO;
 import br.com.libdamas.models.Loan;
-import br.com.libdamas.views.MainScreen;
+import br.com.libdamas.views.system.MainScreen;
 
 /**
  * Hello world!

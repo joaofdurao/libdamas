@@ -1,4 +1,4 @@
-package br.com.libdamas.views.configs;
+package br.com.libdamas.views.loan;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -78,6 +78,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    //buttonPanel
     public Component createAddLoanButton() {
         JButton addButton = new JButton("Add Loan");
 
@@ -92,6 +93,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         return addButton;
     }
 
+    //buttonPanel
     public Component createDeleteLoanButton() {
         JButton deleteButton = new JButton("Delete Loan");
         deleteButton.addActionListener(new ActionListener() {
@@ -105,13 +107,13 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         return deleteButton;
     }
 
+    //buttonPanel
     public Component createPostponeLoanButton() {
         JButton postponeButton = new JButton("Postpone Return Date");
         postponeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Postpone Return Date button action
-                // TODO: Implement postpone return date functionality
+                new PostponeLoanScreen();
             }
         });
 
