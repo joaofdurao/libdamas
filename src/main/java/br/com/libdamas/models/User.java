@@ -14,6 +14,8 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "USERS_TB")
@@ -25,16 +27,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 250)
+    @Size(min = 5, max = 250)
+    @Column(length = 250, nullable = false)
     private String name;
 
+    @Pattern(regexp = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[0-9])[0-9]{3}\\-?[0-9]{4}$")
     @Column(length = 10)
     private String phoneNumber;
 
-    @Column(length = 12)
+    @Size(max = 12)
+    @Column(length = 12, nullable = false)
     private String enrollment;
 
-    @Column()
+    @Size(min = 6)
+    @Column(nullable = false)
     private String passsword;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
