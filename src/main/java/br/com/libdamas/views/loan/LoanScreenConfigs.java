@@ -62,9 +62,10 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         if (loan == null) {
             JOptionPane.showMessageDialog(LoanScreenConfigs.this, "Loan not found.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            
+
         } else {
-            JOptionPane.showMessageDialog(LoanScreenConfigs.this, loan.toString(), "Loan " + loan.getId(), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(LoanScreenConfigs.this, loan.toString(), "Loan " + loan.getId(),
+                    JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -78,7 +79,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    //buttonPanel
+    // buttonPanel
     public Component createAddLoanButton() {
         JButton addButton = new JButton("Add Loan");
 
@@ -93,7 +94,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         return addButton;
     }
 
-    //buttonPanel
+    // buttonPanel
     public Component createDeleteLoanButton() {
         JButton deleteButton = new JButton("Delete Loan");
         deleteButton.addActionListener(new ActionListener() {
@@ -107,7 +108,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         return deleteButton;
     }
 
-    //buttonPanel
+    // buttonPanel
     public Component createPostponeLoanButton() {
         JButton postponeButton = new JButton("Postpone Return Date");
         postponeButton.addActionListener(new ActionListener() {
