@@ -1,5 +1,7 @@
 package br.com.libdamas.controllers;
 
+import java.util.List;
+
 import br.com.libdamas.DAO.UserDAO;
 import br.com.libdamas.models.User;
 import jakarta.validation.Valid;
@@ -36,7 +38,7 @@ public class UserController {
         return userDAO.findByEnrollment(enrollment);
     }
 
-    public User getUserByName(String partialName) {
+    public List<User> getUserByName(String partialName) {
         return userDAO.findByName(partialName);
     }
 

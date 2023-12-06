@@ -22,13 +22,32 @@ public class UserDAO extends InstanceDAO<User> {
 		query.setParameter("enrollment", enrollment);
 		List<User> users = query.getResultList();
 		if (users.isEmpty()) {
+			System.out.println("Nenhum usuário foi encontrado com essa matrícula");
 			return null;
 		} else {
 			return users.get(0);
 		}
 	}
 
-	public User findByName(String partialName) {
-		return null;
+	// Part of the name gives a list of possible results
+	public List<User> findByName(String partialName) {
+		JPAUtils jpaUtils = new JPAUtils();
+		EntityManager entityManager = jpaUtils.getEntityManager();
+		
+		try {
+			TypedQuery<User> query = entityManager.createQuery("FROM User WHERE name LIKE :partialName", User.class);
+			query.setParameter("partialName", "%" + partialName + "%");
+			List<User> users = query.getResultList();
+			if (users.isEmpty()) {
+				System.out.println("Nenhum usuário encontrado com o nome buscado");
+				return null;
+			} else {
+				return users;
+			}
+		} finally {
+			entityManager.close();
+		}
 	}
+
+
 }
