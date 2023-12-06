@@ -19,7 +19,7 @@ public abstract class InstanceDAO<T> {
     }
 
     //FindByID
-    public T findInstance(Integer id) {
+    public T findInstance(Long id) {
         EntityManager entityManager = jpaUtils.getEntityManager();
         return entityManager.find(getEntityClass(), id);
     }
@@ -31,12 +31,12 @@ public abstract class InstanceDAO<T> {
     }
 
     //Update
-    public void updateInstance(T obj, Integer id) {
+    public void updateInstance(T obj, Long id) {
         jpaUtils.executeInsideTransaction(entityManager -> entityManager.merge(obj));
     }
 
     //Delete
-    public void deleteInstance(T obj, Integer id) {
+    public void deleteInstance(T obj, Long id) {
         jpaUtils.executeInsideTransaction(entityManager -> entityManager.remove(obj));
     }
 
