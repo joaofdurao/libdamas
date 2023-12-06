@@ -3,16 +3,22 @@ package br.com.libdamas.models;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "USERS_TB")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public class User {
 
     @Id
@@ -28,30 +34,29 @@ public class User {
     @Column(length = 12)
     private String enrollment;
 
-    @Column(length = 50)
-    private String type;
+    @Column()
+    private String passsword;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Loan> loans;
 
+    // O Hibernate deve ser capaz de criar uma coluna com o nome "type" como
+    // descrito no "@DiscriminatorColumn"
+    // @Column(length = 50)
+    // private String type;
+
     public User() {
     }
 
-    public User(long id, String name, String phoneNumber, String enrollment, String type, List<Loan> loans) {
-        this.id = id;
+    public User(String name, String phoneNumber, String enrollment, String password) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.enrollment = enrollment;
-        this.type = type;
-        this.loans = loans;
+        this.passsword = password;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -78,26 +83,18 @@ public class User {
         this.enrollment = enrollment;
     }
 
-    public String getType() {
-        return type;
+    // O uso de Strings e getters and setters neste caso é proposital para facilitar o uso.
+    public String getPasssword() {
+        return passsword;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<Loan> getLoans() {
-        return loans;
-    }
-
-    public void setLoans(List<Loan> loans) {
-        this.loans = loans;
+    public void setPasssword(String passsword) {
+        this.passsword = passsword;
     }
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", enrollment=" + enrollment
-                + ", type=" + type + ", loans=" + loans + "]";
+        return "User [name=" + name + ", phoneNumber=" + phoneNumber + ", enrollment=" + enrollment + "]";
     }
 
 }
