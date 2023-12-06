@@ -16,7 +16,7 @@ public class UserController {
         if (user == null) {
             return false;
         }
-        return user.getPassword().equals(password);
+        return user.getPasssword().equals(password);
     }
 
 }

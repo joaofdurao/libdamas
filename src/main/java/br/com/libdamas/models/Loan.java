@@ -1,6 +1,6 @@
 package br.com.libdamas.models;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -27,10 +27,10 @@ public class Loan {
     private Long id;
 
     @Temporal(TemporalType.DATE)
-    private Date loanDate;
+    private LocalDate loanDate;
 
     @Temporal(TemporalType.DATE)
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @Column
     @Convert(converter = org.hibernate.type.YesNoConverter.class)
@@ -53,7 +53,7 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Long id, Date loanDate, Date returnDate, boolean closed, boolean overdue, User user) {
+    public Loan(Long id, LocalDate loanDate, LocalDate returnDate, boolean closed, boolean overdue, User user) {
         this.id = id;
         this.loanDate = loanDate;
         this.returnDate = returnDate;
@@ -70,19 +70,19 @@ public class Loan {
         this.id = id;
     }
 
-    public Date getLoanDate() {
+    public LocalDate getLoanDate() {
         return loanDate;
     }
 
-    public void setLoanDate(Date loanDate) {
+    public void setLoanDate(LocalDate loanDate) {
         this.loanDate = loanDate;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
