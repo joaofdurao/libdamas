@@ -14,7 +14,7 @@ public class UserDAO extends InstanceDAO<User> {
 		return User.class;
 	}
 
-	// FindByName
+	// FindByEnrollment
 	public User findByEnrollment(String enrollment) {
 		JPAUtils jpaUtils = new JPAUtils();
 		EntityManager entityManager = jpaUtils.getEntityManager();
@@ -26,5 +26,9 @@ public class UserDAO extends InstanceDAO<User> {
 		} else {
 			return users.get(0);
 		}
+	}
+
+	public User findByName(String partialName) {
+		return null;
 	}
 }
