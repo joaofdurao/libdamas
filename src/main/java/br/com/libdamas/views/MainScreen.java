@@ -9,9 +9,9 @@ public class MainScreen extends ScreenConfigs<MainScreen> {
 
     @Override
     protected void initComponents() {
-        booksButton();
-        loansButton();
-        usersButton();
+        openBookScreenButton();
+        openLoanScreenButton();
+        openUserScreenButton();
     }
 
     @Override

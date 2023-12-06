@@ -21,7 +21,7 @@ public abstract class ScreenConfigs<T> extends JFrame {
         setVisible(true);
     }
 
-    public void booksButton() {
+    public void openBookScreenButton() {
         JButton booksButton = new JButton("Books");
         booksButton.setBounds(50, 50, 100, 30);
         booksButton.addActionListener(new ActionListener() {
@@ -34,7 +34,7 @@ public abstract class ScreenConfigs<T> extends JFrame {
         add(booksButton);
     }
 
-    public void loansButton() {
+    public void openLoanScreenButton() {
         JButton loansButton = new JButton("Loans");
         loansButton.setBounds(50, 100, 100, 30);
         loansButton.addActionListener(new ActionListener() {
@@ -47,7 +47,7 @@ public abstract class ScreenConfigs<T> extends JFrame {
         add(loansButton);
     }
 
-    public void usersButton() {
+    public void openUserScreenButton() {
         JButton usersButton = new JButton("Users");
         usersButton.setBounds(50, 150, 100, 30);
         usersButton.addActionListener(new ActionListener() {
