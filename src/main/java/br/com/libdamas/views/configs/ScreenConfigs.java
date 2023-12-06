@@ -1,10 +1,12 @@
-package br.com.libdamas.views;
+package br.com.libdamas.views.configs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import br.com.libdamas.views.LoanScreen;
 
 public abstract class ScreenConfigs<T> extends JFrame {
 
@@ -18,7 +20,6 @@ public abstract class ScreenConfigs<T> extends JFrame {
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     public void openBookScreenButton() {

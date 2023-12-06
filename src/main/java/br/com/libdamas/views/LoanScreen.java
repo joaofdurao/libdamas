@@ -1,20 +1,24 @@
 package br.com.libdamas.views;
 
-public class LoanScreen extends ScreenConfigs<LoanScreen> {
+import br.com.libdamas.views.configs.LoanScreenConfigs;
+
+public class LoanScreen extends LoanScreenConfigs<LoanScreen> {
 
     public LoanScreen() {
-        initScreenTemplate();
+        initLoanScreenTemplate();
         initComponents();
+        setVisible(true);
     }
 
     @Override
     protected void initComponents() {
-        
+        addLoanTable();
+        addSearchField();
+        addButtonPanel();
     }
 
     @Override
     protected Class<LoanScreen> getEntityClass() {
         return LoanScreen.class;
     }
-
 }
