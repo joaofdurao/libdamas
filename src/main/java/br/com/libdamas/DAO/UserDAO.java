@@ -15,11 +15,11 @@ public class UserDAO extends InstanceDAO<User> {
 	}
 
 	// FindByName
-	public User findByName(String name) {
+	public User findByEnrollment(String enrollment) {
 		JPAUtils jpaUtils = new JPAUtils();
 		EntityManager entityManager = jpaUtils.getEntityManager();
-		TypedQuery<User> query = entityManager.createQuery("FROM User WHERE name = :name", User.class);
-		query.setParameter("name", name);
+		TypedQuery<User> query = entityManager.createQuery("FROM User WHERE enrollment = :enrollment", User.class);
+		query.setParameter("enrollment", enrollment);
 		List<User> users = query.getResultList();
 		if (users.isEmpty()) {
 			return null;

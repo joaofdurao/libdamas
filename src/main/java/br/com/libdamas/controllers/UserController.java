@@ -11,8 +11,8 @@ public class UserController {
         this.userDAO = new UserDAO();
     }
 
-    public boolean validateCredentials(String name, String password) {
-        User user = userDAO.findByName(name);
+    public boolean validateCredentials(String enrollment, String password) {
+        User user = userDAO.findByEnrollment(enrollment);
         if (user == null) {
             return false;
         }

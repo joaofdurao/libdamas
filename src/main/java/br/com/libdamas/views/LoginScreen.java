@@ -15,11 +15,13 @@ import javax.swing.JTextField;
 import br.com.libdamas.controllers.UserController;
 
 public class LoginScreen extends JFrame {
-    private JTextField nameField;
+    private JTextField enrollmentField;
     private JPasswordField passwordField;
+    private UserController userController = new UserController();
 
     public LoginScreen() {
-        setTitle("Tela de Login");
+
+        setTitle("LOGIN");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setLocationRelativeTo(null);
@@ -27,8 +29,8 @@ public class LoginScreen extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-        JLabel nameLabel = new JLabel("Name:");
-        nameField = new JTextField();
+        JLabel enrollmentLabel = new JLabel("Enrollment:");
+        enrollmentField = new JTextField();
         JLabel passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField();
         JButton loginButton = new JButton("Login");
@@ -36,23 +38,12 @@ public class LoginScreen extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText();
-                String password = new String(passwordField.getPassword());
-
-                UserController userController = new UserController();
-                boolean isValid = userController.validateCredentials(name, password);
-
-                if (isValid) {
-                    JOptionPane.showMessageDialog(LoginScreen.this, "Login successful!");
-                } else {
-                    JOptionPane.showMessageDialog(LoginScreen.this, "Invalid name or password.", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+                handleLogin();
             }
         });
 
-        panel.add(nameLabel);
-        panel.add(nameField);
+        panel.add(enrollmentLabel);
+        panel.add(enrollmentField);
         panel.add(passwordLabel);
         panel.add(passwordField);
         panel.add(new JLabel());
@@ -61,5 +52,19 @@ public class LoginScreen extends JFrame {
         add(panel);
     }
 
+    private void handleLogin() {
+        String enrollment = enrollmentField.getText();
+        String password = new String(passwordField.getPassword());
 
+        boolean isValid = userController.validateCredentials(enrollment, password);
+
+        if (isValid) {
+            JOptionPane.showMessageDialog(LoginScreen.this, "Login successful!");
+        } else {
+            JOptionPane.showMessageDialog(LoginScreen.this, "Invalid enrollment or password.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            enrollmentField.setText("");
+            passwordField.setText("");
+        }
+    }
 }
