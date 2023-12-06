@@ -1,10 +1,11 @@
-package br.com.libdamas.views;
+package br.com.libdamas.views.system;
 
 public class MainScreen extends ScreenConfigs<MainScreen> {
 
     public MainScreen() {
         initScreenTemplate();
         initComponents();
+        setVisible(true);
     }
 
     @Override

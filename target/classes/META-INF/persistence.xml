@@ -30,7 +30,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.highlight_sql" value="true"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="drop-and-create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
 
     </persistence-unit>

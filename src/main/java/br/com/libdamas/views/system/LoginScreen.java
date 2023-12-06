@@ -1,4 +1,4 @@
-package br.com.libdamas.views;
+package br.com.libdamas.views.system;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

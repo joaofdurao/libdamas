@@ -8,7 +8,7 @@ public class LoanDAO extends InstanceDAO<Loan> {
 		return Loan.class;
 	}
 
-	public void postponeLoan(Integer loanId) {
+	public void postponeLoan(Long loanId) {
 		Loan loan = findInstance(loanId);
 		if (loan != null) {
 			loan.setReturnDate(loan.getReturnDate().plusDays(15));
