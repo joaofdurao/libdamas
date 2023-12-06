@@ -32,7 +32,7 @@ public class User {
     private String name;
 
     @Pattern(regexp = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[0-9])[0-9]{3}\\-?[0-9]{4}$")
-    @Column(length = 10)
+    @Column(length = 15)
     private String phoneNumber;
 
     @Size(max = 12)
