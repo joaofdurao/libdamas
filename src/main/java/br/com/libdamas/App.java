@@ -29,7 +29,7 @@ public class App {
         // for (int i = 0; i < 25; i++) {
         //     Loan loanTest = new Loan();
         //     LoanDAO loanTeste = new LoanDAO();
-        //     loanTest.setUser(new UserDAO().findByEnrollment("456"));
+        //     loanTest.setUser(new UserDAO().findByEnrollment("789"));
         //     loanTest.setLoanDate(LocalDate.now());
         //     loanTest.setReturnDate(LocalDate.now().plusDays(i));
         //     loanTest.setClosed(false);

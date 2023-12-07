@@ -12,7 +12,7 @@ public class AdminLoanScreen extends LoanScreenConfigs<AdminLoanScreen> {
     @Override
     protected void initComponents() {
         addAdminLoanTable();
-        addSearchField();
+        addAdminSearchField();
         addAdminButtonPanel();
     }
 

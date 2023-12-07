@@ -44,6 +44,72 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    // Search Field Component--------------------------------
+    public void addAdminSearchField() {
+        JPanel searchPanel = new JPanel();
+        JTextField searchField = new JTextField(20);
+        JButton searchButton = new JButton("Search");
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchLoan(Long.parseLong(searchField.getText()));
+            }
+        });
+
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+
+        add(searchPanel, BorderLayout.NORTH);
+    }
+
+    // Search Loan Method
+    protected void searchLoan(Long loanId) {
+        Loan loan = loanController.findLoanById(loanId);
+
+        if (loan == null) {
+            JOptionPane.showMessageDialog(LoanScreenConfigs.this, "Loan not found.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(LoanScreenConfigs.this, loan.toString(), "Loan " + loan.getId(),
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    public void addUserSearchField() {
+        JPanel searchPanel = new JPanel();
+        JTextField searchField = new JTextField(20);
+        JButton searchButton = new JButton("Search");
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchUserLoan(Long.parseLong(searchField.getText()));
+            }
+        });
+
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+
+        add(searchPanel, BorderLayout.NORTH);
+    }
+
+    protected void searchUserLoan(Long loanId) {
+        Loan loan = loanController.getUserLoanById(loanId, userId);
+
+        if (loan == null) {
+            JOptionPane.showMessageDialog(LoanScreenConfigs.this, "Loan not found.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(LoanScreenConfigs.this, loan.toString(), "Loan " + loan.getId(),
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
     // Table Component --------------------------------------
     public void addAdminLoanTable() {
         JTable loanTable = new JTable();
@@ -112,40 +178,6 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
 
     }
 
-    // Search Field Component--------------------------------
-    public void addSearchField() {
-        JPanel searchPanel = new JPanel();
-        JTextField searchField = new JTextField(20);
-        JButton searchButton = new JButton("Search");
-
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchLoan(Long.parseLong(searchField.getText()));
-            }
-        });
-
-        searchPanel.add(searchField);
-        searchPanel.add(searchButton);
-
-        add(searchPanel, BorderLayout.NORTH);
-    }
-
-    // Search Loan Method
-    protected void searchLoan(Long loanId) {
-        Loan loan = loanController.findLoanById(loanId);
-
-        if (loan == null) {
-            JOptionPane.showMessageDialog(LoanScreenConfigs.this, "Loan not found.", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-
-        } else {
-            JOptionPane.showMessageDialog(LoanScreenConfigs.this, loan.toString(), "Loan " + loan.getId(),
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-
-    }
-
     // Button Panel Component--------------------------------
     public void addAdminButtonPanel() {
         JPanel buttonPanel = new JPanel();
@@ -156,7 +188,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public void addButtonPanel() {
+    public void addUserButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(createPostponeLoanButton());
 
@@ -198,7 +230,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         postponeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PostponeLoanScreen();
+                new PostponeLoanScreen(userId);
             }
         });
 
