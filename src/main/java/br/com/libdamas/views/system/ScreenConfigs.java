@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import br.com.libdamas.controllers.UserController;
 import br.com.libdamas.views.loan.AdminLoanScreen;
 import br.com.libdamas.views.loan.LoanScreen;
+import br.com.libdamas.views.user.AdminUserScreen;
+import br.com.libdamas.views.user.UserScreen;
 
 public abstract class ScreenConfigs<T> extends JFrame {
 
@@ -20,6 +22,10 @@ public abstract class ScreenConfigs<T> extends JFrame {
     public ScreenConfigs(Long userId) {
         userController = new UserController();
         this.userId = userId;
+    }
+
+    public ScreenConfigs() {
+        super();
     }
 
     public void initScreenTemplate() {
@@ -83,7 +89,11 @@ public abstract class ScreenConfigs<T> extends JFrame {
     }
 
     public void openUsersScreen() {
-        // new UserScreen();
+        if (userController.getUserRole(userId).equals("admin")) {
+            new AdminUserScreen(userId);
+        } else{
+            // new UserScreen(userId);
+        }
     }
 
 }
