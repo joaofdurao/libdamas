@@ -43,6 +43,10 @@ public class UserController {
     public List<User> getUserByName(String partialName) {
         return userDAO.findByName(partialName);
     }
+
+    public List<User> getAll() {
+        return userDAO.findAllInstance();
+    }
     
     public String getUserRole(Long userId) {
         User testUser = getUserById(userId);
