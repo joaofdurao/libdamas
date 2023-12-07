@@ -53,6 +53,19 @@ public class UserController {
         }
     }
 
+    public String[] getUserMainInfos(Long userId) {
+        String[] userInfos = new String[3];
+        User searchingUser = getUserById(userId);
+        userInfos[0] = searchingUser.getName();
+        userInfos[1] = searchingUser.getEnrollment();
+        userInfos[3] = searchingUser.getPhoneNumber();
+        return userInfos;
+    }
+
+    public String userInfosToString(Object[] userInfos) {
+        return "[" + userInfos[0] + userInfos[1] + userInfos + "]";
+    }
+
     public void updateUser(Long userId, @Valid User user) {
         // Check if the credentials are admin
         userDAO.updateInstance(user, userId);
