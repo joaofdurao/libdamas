@@ -53,13 +53,14 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Long id, LocalDate loanDate, LocalDate returnDate, boolean closed, boolean overdue, User user) {
-        this.id = id;
+    public Loan(LocalDate loanDate, LocalDate returnDate, boolean closed, boolean overdue, User user,
+            List<Book> books) {
         this.loanDate = loanDate;
         this.returnDate = returnDate;
         this.closed = closed;
         this.overdue = overdue;
         this.user = user;
+        this.books = books;
     }
 
     public Long getId() {
@@ -110,10 +111,23 @@ public class Loan {
         this.user = user;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public String toString() {
-        return "Loan [id=" + id + ", loanDate=" + loanDate + ", returnDate=" + returnDate + ", closed=" + closed
-                + ", overdue=" + overdue + ", user=" + user.getEnrollment() + "]";
+        return "-- Loan nº: " + id + " / User Enrollment: " + user.getEnrollment() + 
+        " ---\nLoan Date: " + loanDate + "\nReturn Date: " + returnDate + 
+        "\nClosed: " + closed + " / Overdue: " + overdue +  
+        "\n Books: " + books;
     }
+
+    
+
 
 }

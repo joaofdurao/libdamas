@@ -1,5 +1,9 @@
 package br.com.libdamas.controllers;
 
+
+
+import java.util.List;
+
 import br.com.libdamas.DAO.LoanDAO;
 import br.com.libdamas.models.Loan;
 
@@ -34,6 +38,14 @@ public class LoanController {
         }
         
         return false;
+    }
+
+    public List<Loan> getLoansByUser(Long userId) {
+        try {
+            return loanDAO.findLoansByUser(userId);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
