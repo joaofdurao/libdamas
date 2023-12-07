@@ -21,9 +21,9 @@ public class PostponeLoanScreen extends JFrame {
     private JTextField searchField;
     private JTable resultsTable;
     private JButton searchButton;
-    private JButton postponeButton; // Add the postpone button
+    private JButton postponeButton; 
     private JPanel topPanel;
-    private JPanel bottomPanel; // Add the bottom panel
+    private JPanel bottomPanel; 
 
     public PostponeLoanScreen() {
         loanController = new LoanController();
@@ -49,12 +49,18 @@ public class PostponeLoanScreen extends JFrame {
 
         // Results Table --------------------------------------
         String[] columnNames = { "Loan ID", "User", "Loan Date", "Return Date", "Overdue" };
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         resultsTable = new JTable(model);
 
         // Postpone Button --------------------------------------
         bottomPanel = new JPanel();
         postponeButton = new JButton("Postpone");
+
         postponeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,12 +84,12 @@ public class PostponeLoanScreen extends JFrame {
                     JOptionPane.ERROR_MESSAGE);
 
         } else {
-            updateTable(loan);
+            updateTables(loan);
         }
 
     }
 
-    protected void updateTable(Loan loan) {
+    protected void updateTables(Loan loan) {
         DefaultTableModel model = (DefaultTableModel) resultsTable.getModel();
 
         if (model.getRowCount() > 0) {
@@ -111,7 +117,7 @@ public class PostponeLoanScreen extends JFrame {
             boolean postponed = loanController.postponeLoan(loanId);
 
             if (postponed) {
-                updateTable(loanController.findLoanById(loanId));
+                updateTables(loanController.findLoanById(loanId));
                 JOptionPane.showMessageDialog(PostponeLoanScreen.this, "Loan postponed successfully.", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {

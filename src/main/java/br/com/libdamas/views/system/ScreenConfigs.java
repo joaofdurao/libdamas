@@ -76,9 +76,9 @@ public abstract class ScreenConfigs<T> extends JFrame {
 
     public void openLoansScreen() {
         if (userController.getUserRole(userId).equals("admin")) {
-            new AdminLoanScreen();
+            new AdminLoanScreen(userId);
         } else{
-            new LoanScreen();
+            new LoanScreen(userId);
         }
     }
 

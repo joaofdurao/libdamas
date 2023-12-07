@@ -2,7 +2,8 @@ package br.com.libdamas.views.loan;
 
 public class LoanScreen extends LoanScreenConfigs<LoanScreen> {
 
-    public LoanScreen() {
+    public LoanScreen(Long userId) {
+        super(userId);
         initLoanScreenTemplate();
         initComponents();
         setVisible(true);
@@ -10,7 +11,7 @@ public class LoanScreen extends LoanScreenConfigs<LoanScreen> {
 
     @Override
     protected void initComponents() {
-        addLoanTable();
+        addUserLoanTable();
         addSearchField();
         addButtonPanel();
     }

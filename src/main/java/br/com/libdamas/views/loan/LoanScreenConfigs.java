@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import br.com.libdamas.controllers.LoanController;
 import br.com.libdamas.models.Loan;
@@ -24,24 +28,91 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
 
     private LoanController loanController;
 
-    public LoanScreenConfigs() {
+    private Long userId;
+
+    public LoanScreenConfigs(Long userId) {
         loanController = new LoanController();
+        this.userId = userId;
     }
 
+    // Template Method --------------------------------------
     public void initLoanScreenTemplate() {
         setTitle(getEntityClass().getSimpleName());
-        setSize(800, 600);
+        setSize(800, 480);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
     }
 
-    public void addLoanTable() {
+    // Table Component --------------------------------------
+    public void addAdminLoanTable() {
         JTable loanTable = new JTable();
+        JScrollPane scrollPane = new JScrollPane(loanTable);
+
+        add(scrollPane, BorderLayout.CENTER);
+    }
+
+    public void addUserLoanTable() {
+        String[] columnNames = { "Loan ID", "User", "Loan Date", "Return Date", "Closed", "Overdue" };
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        updateUserTable(model);
+
+        JTable loanTable = new JTable(model);
+        loanTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                selectTableLine(e);
+            }
+        });
         JScrollPane scrollPane = new JScrollPane(loanTable);
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    public void fillUserTable(DefaultTableModel model) {
+        List<Loan> loans = loanController.getLoansByUser(userId);
+        for (Loan loan : loans) {
+            model.addRow(
+                    new Object[] { loan.getId(), loan.getUser().getName(), loan.getLoanDate(), loan.getReturnDate(),
+                            loan.isOverdue() });
+        }
+    }
+
+    public void updateUserTable(DefaultTableModel model) {
+        if (model.getRowCount() > 0) {
+            model.setRowCount(0);
+            fillUserTable(model);
+
+        } else {
+            fillUserTable(model);
+        }
+    }
+
+    // Select Table Line Method
+    public void selectTableLine(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            JTable target = (JTable) e.getSource();
+            int row = target.getSelectedRow();
+            Long loanId = (Long) target.getValueAt(row, 0);
+
+            Loan loan = loanController.findLoanById(loanId);
+
+            if (loan == null) {
+                JOptionPane.showMessageDialog(LoanScreenConfigs.this, "Loan not found.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(LoanScreenConfigs.this, loan.toString(), "Loan " + loan.getId(),
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+    }
+
+    // Search Field Component--------------------------------
     public void addSearchField() {
         JPanel searchPanel = new JPanel();
         JTextField searchField = new JTextField(20);
@@ -60,6 +131,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
         add(searchPanel, BorderLayout.NORTH);
     }
 
+    // Search Loan Method
     protected void searchLoan(Long loanId) {
         Loan loan = loanController.findLoanById(loanId);
 
@@ -74,6 +146,7 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
 
     }
 
+    // Button Panel Component--------------------------------
     public void addAdminButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(createAddLoanButton());
