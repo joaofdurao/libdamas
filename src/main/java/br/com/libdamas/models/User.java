@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "USERS_TB")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 public class User {
 
     @Id
@@ -32,7 +32,7 @@ public class User {
     private String name;
 
     @Pattern(regexp = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[0-9])[0-9]{3}\\-?[0-9]{4}$")
-    @Column(length = 10)
+    @Column(length = 15)
     private String phoneNumber;
 
     @Size(max = 12)
@@ -42,6 +42,9 @@ public class User {
     @Size(min = 6)
     @Column(nullable = false)
     private String passsword;
+
+    @Column(name = "role", insertable = false, updatable = false)
+    private String role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Loan> loans;
@@ -96,6 +99,10 @@ public class User {
 
     public void setPasssword(String passsword) {
         this.passsword = passsword;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     @Override
