@@ -34,7 +34,7 @@ public class UserDAO extends InstanceDAO<User> {
 	public List<User> findByName(String partialName) {
 		JPAUtils jpaUtils = new JPAUtils();
 		EntityManager entityManager = jpaUtils.getEntityManager();
-		
+
 		try {
 			TypedQuery<User> query = entityManager.createQuery("FROM User WHERE name LIKE :partialName", User.class);
 			query.setParameter("partialName", "%" + partialName + "%");
@@ -60,6 +60,5 @@ public class UserDAO extends InstanceDAO<User> {
 
 		return (String) query.getSingleResult();
 	}
-	
-	// force commit
+
 }
