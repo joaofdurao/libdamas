@@ -12,8 +12,8 @@ public class LoanScreen extends LoanScreenConfigs<LoanScreen> {
     @Override
     protected void initComponents() {
         addUserLoanTable();
-        addSearchField();
-        addButtonPanel();
+        addUserSearchField();
+        addUserButtonPanel();
     }
 
     @Override

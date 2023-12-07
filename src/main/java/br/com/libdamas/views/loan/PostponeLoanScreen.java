@@ -25,7 +25,7 @@ public class PostponeLoanScreen extends JFrame {
     private JPanel topPanel;
     private JPanel bottomPanel; 
 
-    public PostponeLoanScreen() {
+    public PostponeLoanScreen(Long userId) {
         loanController = new LoanController();
 
         setTitle("Postpone Loan Screen");
@@ -41,7 +41,7 @@ public class PostponeLoanScreen extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                searchLoan(Long.parseLong(searchField.getText()));
+                searchLoan(Long.parseLong(searchField.getText()), userId);
             }
         });
         topPanel.add(searchField);
@@ -76,8 +76,8 @@ public class PostponeLoanScreen extends JFrame {
         setVisible(true);
     }
 
-    protected void searchLoan(Long loanId) {
-        Loan loan = loanController.findLoanById(loanId);
+    protected void searchLoan(Long loanId, Long userId) {
+        Loan loan = loanController.getUserLoanById(loanId, userId);
 
         if (loan == null) {
             JOptionPane.showMessageDialog(PostponeLoanScreen.this, "Loan not found.", "Error",

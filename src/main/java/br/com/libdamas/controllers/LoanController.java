@@ -48,5 +48,13 @@ public class LoanController {
         }
     }
 
+    public Loan getUserLoanById(Long loanId, Long userId) {
+        Loan loan = loanDAO.findInstance(loanId);
+        if (loan != null && loan.getUser().getId() == userId) {
+            return loan;
+        }
+        return null;
+    }
+
 
 }
