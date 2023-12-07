@@ -15,6 +15,7 @@ public class AdminLoanScreen extends LoanScreenConfigs<AdminLoanScreen> {
         addButtonPanel();
     }
 
+
     @Override
     protected Class<AdminLoanScreen> getEntityClass() {
         return AdminLoanScreen.class;

@@ -22,7 +22,11 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
 
     protected abstract void initComponents();
 
-    private LoanController loanController = new LoanController();
+    private LoanController loanController;
+
+    public LoanScreenConfigs() {
+        loanController = new LoanController();
+    }
 
     public void initLoanScreenTemplate() {
         setTitle(getEntityClass().getSimpleName());

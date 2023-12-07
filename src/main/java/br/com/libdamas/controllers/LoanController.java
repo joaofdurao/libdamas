@@ -5,8 +5,14 @@ import br.com.libdamas.models.Loan;
 
 public class LoanController {
 
+    LoanDAO loanDAO;
+
+    public LoanController() {
+        loanDAO = new LoanDAO();
+    }
+
+    // find loan by id
     public Loan findLoanById(Long loanId) {
-        LoanDAO loanDAO = new LoanDAO();
         try {
             return loanDAO.findInstance(loanId);
         } catch (Exception e) {
@@ -14,4 +20,21 @@ public class LoanController {
         }
 
     }
+
+    public boolean postponeLoan(Long loanId) {
+        try {
+            Loan loan = loanDAO.findInstance(loanId);
+            if (loan != null) {
+                loan.setReturnDate(loan.getReturnDate().plusDays(15));
+                loanDAO.updateInstance(loan, loanId);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return false;
+    }
+
+
 }
