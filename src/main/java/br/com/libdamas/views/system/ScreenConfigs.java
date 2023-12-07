@@ -6,12 +6,21 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import br.com.libdamas.controllers.UserController;
 import br.com.libdamas.views.loan.AdminLoanScreen;
+import br.com.libdamas.views.loan.LoanScreen;
 
 public abstract class ScreenConfigs<T> extends JFrame {
 
     protected abstract Class<T> getEntityClass();
     protected abstract void initComponents();
+    private UserController userController;
+    private Long userId;
+
+    public ScreenConfigs(Long userId) {
+        userController = new UserController();
+        this.userId = userId;
+    }
 
     public void initScreenTemplate() {
         setTitle(getEntityClass().getSimpleName());
@@ -66,7 +75,11 @@ public abstract class ScreenConfigs<T> extends JFrame {
     }
 
     public void openLoansScreen() {
-        new AdminLoanScreen();
+        if (userController.getUserRole(userId).equals("admin")) {
+            new AdminLoanScreen();
+        } else{
+            new LoanScreen();
+        }
     }
 
     public void openUsersScreen() {

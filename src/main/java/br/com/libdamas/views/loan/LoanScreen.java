@@ -1,8 +1,8 @@
 package br.com.libdamas.views.loan;
 
-public class AdminLoanScreen extends LoanScreenConfigs<AdminLoanScreen> {
+public class LoanScreen extends LoanScreenConfigs<LoanScreen> {
 
-    public AdminLoanScreen() {
+    public LoanScreen() {
         initLoanScreenTemplate();
         initComponents();
         setVisible(true);
@@ -12,12 +12,11 @@ public class AdminLoanScreen extends LoanScreenConfigs<AdminLoanScreen> {
     protected void initComponents() {
         addLoanTable();
         addSearchField();
-        addAdminButtonPanel();
+        addButtonPanel();
     }
 
-
     @Override
-    protected Class<AdminLoanScreen> getEntityClass() {
-        return AdminLoanScreen.class;
+    protected Class<LoanScreen> getEntityClass() {
+        return LoanScreen.class;
     }
 }

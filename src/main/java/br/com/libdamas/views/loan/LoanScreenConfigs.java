@@ -74,10 +74,17 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
 
     }
 
-    public void addButtonPanel() {
+    public void addAdminButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(createAddLoanButton());
         buttonPanel.add(createDeleteLoanButton());
+        buttonPanel.add(createPostponeLoanButton());
+
+        add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    public void addButtonPanel() {
+        JPanel buttonPanel = new JPanel();
         buttonPanel.add(createPostponeLoanButton());
 
         add(buttonPanel, BorderLayout.SOUTH);
