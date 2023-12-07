@@ -15,18 +15,20 @@ public class UserController {
     }
 
     public void createUser(@Valid User user) {
+        // Check if the credentials are admin
         // Fetch user if it exists
         User testUser = this.getUserByEnrollment(user.getEnrollment());
         // Check if user is new testUser is null
         if (testUser == null) {
             try {
                 userDAO.createInstance(user);
+                System.out.println("Usuário cadastrado com sucesso");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         } else {
             // If user already exists it should show error message
-            System.out.println("Matrícula já existe");
+            System.out.println("Matrícula já cadastrada");
         }
     }
 
@@ -41,12 +43,23 @@ public class UserController {
     public List<User> getUserByName(String partialName) {
         return userDAO.findByName(partialName);
     }
+    
+    public String getUserRole(Long userId) {
+        User testUser = getUserById(userId);
+        if (testUser != null) {
+            return userDAO.findUserRoleById(userId);
+        } else {
+            return null;
+        }
+    }
 
     public void updateUser(Long userId, @Valid User user) {
+        // Check if the credentials are admin
         userDAO.updateInstance(user, userId);
     }
 
     public void deleteUser(User user, Long userId) {
+        // Check if the credentials are admin
         userDAO.deleteInstance(user, userId);
     }
 
