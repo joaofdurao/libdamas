@@ -1,4 +1,4 @@
-package br.com.libdamas.views.system;
+package br.com.libdamas.views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,21 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import br.com.libdamas.controllers.UserController;
-import br.com.libdamas.views.loan.AdminLoanScreen;
-import br.com.libdamas.views.loan.LoanScreen;
-
 public abstract class ScreenConfigs<T> extends JFrame {
 
     protected abstract Class<T> getEntityClass();
     protected abstract void initComponents();
-    private UserController userController;
-    private Long userId;
-
-    public ScreenConfigs(Long userId) {
-        userController = new UserController();
-        this.userId = userId;
-    }
 
     public void initScreenTemplate() {
         setTitle(getEntityClass().getSimpleName());
@@ -29,6 +18,7 @@ public abstract class ScreenConfigs<T> extends JFrame {
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void openBookScreenButton() {
@@ -75,11 +65,7 @@ public abstract class ScreenConfigs<T> extends JFrame {
     }
 
     public void openLoansScreen() {
-        if (userController.getUserRole(userId).equals("admin")) {
-            new AdminLoanScreen();
-        } else{
-            new LoanScreen();
-        }
+        new LoanScreen();
     }
 
     public void openUsersScreen() {

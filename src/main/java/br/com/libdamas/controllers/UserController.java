@@ -54,12 +54,16 @@ public class UserController {
     }
 
     public void updateUser(Long userId, @Valid User user) {
-        // Check if the credentials are admin
+       // Só admin pode usar esse método - Falta implementar
+       // 1º passo) Consulta a tabela de histórico de usuários logados 
+       // 2º passo) Confere (if-else) se o user.type = "admin" -> segue, senão sout("Usuário sem permissão para atualizar")
         userDAO.updateInstance(user, userId);
     }
 
     public void deleteUser(User user, Long userId) {
-        // Check if the credentials are admin
+       // Só admin pode usar esse método - Falta implementar
+       // 1º passo) Consulta a tabela de histórico de usuários logados 
+       // 2º passo) Confere (if-else) se o user.type = "admin" -> segue, senão sout("Usuário sem permissão para deletar")
         userDAO.deleteInstance(user, userId);
     }
 

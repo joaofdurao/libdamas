@@ -1,4 +1,4 @@
-package br.com.libdamas.views.system;
+package br.com.libdamas.views;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -50,7 +50,6 @@ public class LoginScreen extends JFrame {
         panel.add(loginButton);
 
         add(panel);
-        setVisible(true);
     }
 
     private void handleLogin() {
@@ -61,8 +60,6 @@ public class LoginScreen extends JFrame {
 
         if (isValid) {
             JOptionPane.showMessageDialog(LoginScreen.this, "Login successful!");
-            new MainScreen(userController.getUserByEnrollment(enrollment).getId());
-            setVisible(false);
         } else {
             JOptionPane.showMessageDialog(LoginScreen.this, "Invalid enrollment or password.", "Error",
                     JOptionPane.ERROR_MESSAGE);

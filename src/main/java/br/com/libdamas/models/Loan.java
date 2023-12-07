@@ -113,7 +113,7 @@ public class Loan {
     @Override
     public String toString() {
         return "Loan [id=" + id + ", loanDate=" + loanDate + ", returnDate=" + returnDate + ", closed=" + closed
-                + ", overdue=" + overdue + ", user=" + user.getEnrollment() + "]";
+                + ", overdue=" + overdue + ", user=" + user + "]";
     }
 
 }
