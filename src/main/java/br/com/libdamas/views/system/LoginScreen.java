@@ -60,7 +60,7 @@ public class LoginScreen extends JFrame {
         boolean isValid = userController.validateCredentials(enrollment, password);
 
         if (isValid) {
-            JOptionPane.showMessageDialog(LoginScreen.this, "Login successful!");
+            JOptionPane.showMessageDialog(LoginScreen.this, "Authentication successful!");
             new MainScreen(userController.getUserByEnrollment(enrollment).getId());
             setVisible(false);
         } else {
