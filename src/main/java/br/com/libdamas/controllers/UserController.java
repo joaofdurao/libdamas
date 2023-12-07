@@ -15,7 +15,7 @@ public class UserController {
     }
 
     public void createUser(@Valid User user) {
-        // Check if the credentials are admin
+        // Check if the credentials are admin from the last loggedIn user
         // Fetch user if it exists
         User testUser = this.getUserByEnrollment(user.getEnrollment());
         // Check if user is new testUser is null
