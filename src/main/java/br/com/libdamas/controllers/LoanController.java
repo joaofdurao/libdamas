@@ -56,5 +56,12 @@ public class LoanController {
         return null;
     }
 
-
+    public void addLoan(Loan loan) {
+        LoanDAO loanDAO = new LoanDAO();
+        try {
+            loanDAO.createInstance(loan);
+        } catch (Exception e) {
+            
+        }
+    }
 }

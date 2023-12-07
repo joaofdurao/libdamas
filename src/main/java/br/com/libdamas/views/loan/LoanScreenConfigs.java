@@ -8,8 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -198,15 +200,14 @@ public abstract class LoanScreenConfigs<T> extends JFrame {
     // buttonPanel
     public Component createAddLoanButton() {
         JButton addButton = new JButton("Add Loan");
-
+    
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add Loan button action
-                // TODO: Implement add loan functionality
+                new AddLoanScreen().setVisible(true);
             }
         });
-
+    
         return addButton;
     }
 
